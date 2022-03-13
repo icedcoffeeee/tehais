@@ -1,4 +1,0 @@
-# This file is used internally by FFMPEG.
-file 'file:C:/Users/Hazim Saharuddin/OneDrive - Universiti Malaya/Documents/GitHub/pembentangan/media/videos/LinAlg/480p15/partial_movie_files/FungsiMatriks/2201830969_528167101_3948311151.mp4'
-file 'file:C:/Users/Hazim Saharuddin/OneDrive - Universiti Malaya/Documents/GitHub/pembentangan/media/videos/LinAlg/480p15/partial_movie_files/FungsiMatriks/2201830969_4200696408_4175244416.mp4'
-file 'file:C:/Users/Hazim Saharuddin/OneDrive - Universiti Malaya/Documents/GitHub/pembentangan/media/videos/LinAlg/480p15/partial_movie_files/FungsiMatriks/2201830969_1304100685_3516431543.mp4'

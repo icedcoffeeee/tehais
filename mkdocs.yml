@@ -1,0 +1,73 @@
+site_name: TehAis
+
+nav:
+  - Pengenalan: 
+    - index.md
+    - Tentang Aku: about.md
+  - Fizik:
+    - fizik/index.md
+    - Nota: fizik/nota.md
+  - Matematik:
+      - matematik/index.md
+      - Nota: matematik/nota.md
+      - Pembentangan: matematik/presentation_math.md
+
+theme:
+  name: material
+  favicon: assets/tehais.svg
+  logo: assets/tehais.svg
+  language: ms
+  palette: 
+    - scheme: slate
+      toggle:
+        icon: material/toggle-switch 
+        name: Switch to light mode
+    - scheme: default 
+      primary: amber
+      toggle:
+        icon: material/toggle-switch-off-outline
+        name: Switch to dark mode
+  features:
+    - content.code.annotate
+    - navigation.indexes
+    - navigation.sections
+    - navigation.tabs
+    - navigation.top
+    - navigation.tracking
+    - toc.follow
+
+copyright: Copyright &copy; 2021 - 2022 Ilmi Hazim
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/icedcoffeeee
+      name: Akaun GitHub
+    - icon: fontawesome/brands/youtube
+      link: https://www.youtube.com/channel/UC1bhH5lsAbJJOjDggHwbJYw
+      name: Saluran Youtube tehais
+
+extra_css:
+  - stylesheets/extra.css
+
+extra_javascript:
+  - javascripts/mathjax.js
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+
+markdown_extensions:
+  - admonition
+  - footnotes
+  - md_in_html
+  - pymdownx.mark
+  - toc:
+      permalink: true
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+  - pymdownx.tabbed:
+      alternate_style: true 
+  - pymdownx.tasklist:
+      custom_checkbox: true
