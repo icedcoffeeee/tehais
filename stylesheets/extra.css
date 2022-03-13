@@ -1,0 +1,12 @@
+.md-typeset h1, .md-typeset h2, strong {
+    color: orange;
+    font-weight: bold;
+}
+
+em {
+    color: turquoise;
+}
+
+.md-typeset blockquote {
+    color: #BB9AF7;
+}
