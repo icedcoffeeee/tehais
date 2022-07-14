@@ -12,11 +12,7 @@ class Mean(Scene):
             .next_to(base, DOWN, buff=0.1)
         )
         weight = Dot(color=BLUE).scale(2).next_to(ORIGIN, UP, buff=0.1)
-        force = Arrow(
-            weight.get_center(),
-            weight.get_center() + DOWN,
-            color=RED,
-        )
+        force = Arrow(weight.get_center(), weight.get_center() + DOWN, color=RED)
         weights = VGroup()
         forces = VGroup()
         data = [0, 1, -2, 4.5, -3.5, 2.8]
@@ -94,7 +90,7 @@ class Var(GraphScene):  # kelas GraphScene dibuang menjelang manim v0.10.0
                 ReplacementTransform(d, dots[-1]),
                 lag_ratio=0.2,
                 run_time=1,
-            ),
+            )
         )
         self.wait()
         meanline = Line(
@@ -103,20 +99,12 @@ class Var(GraphScene):  # kelas GraphScene dibuang menjelang manim v0.10.0
             color=YELLOW,
         )
         meanline_label = MathTex("\\overline{x}", color=YELLOW).next_to(meanline, LEFT)
-        self.play(
-            AnimationGroup(
-                Create(meanline),
-                Write(meanline_label),
-                lag_ratio=1,
-            )
-        )
+        self.play(AnimationGroup(Create(meanline), Write(meanline_label), lag_ratio=1))
         self.wait()
         varlines = VGroup()
         for i in range(10):
             varlines += DashedLine(
-                dots[i].get_center(),
-                self.coords_to_point(i + 1, mean),
-                color=BLUE,
+                dots[i].get_center(), self.coords_to_point(i + 1, mean), color=BLUE
             )
         self.play(Create(varlines))
         self.wait()
@@ -246,10 +234,7 @@ class Intro(Scene):
         self.wait(2)
         self.play(
             Create(
-                box2 := VGroup(
-                    SurroundingRectangle(t2[1]),
-                    SurroundingRectangle(t2[2]),
-                )
+                box2 := VGroup(SurroundingRectangle(t2[1]), SurroundingRectangle(t2[2]))
             ),
             FadeOut(box),
         )
@@ -264,11 +249,7 @@ class Intro(Scene):
 
         self.play(Write(set_purata))
         self.wait()
-        self.play(
-            Create(
-                box := SurroundingRectangle(set_purata[0][8:13]),
-            )
-        )
+        self.play(Create(box := SurroundingRectangle(set_purata[0][8:13])))
         self.wait(2)
         self.clear()
 
@@ -300,7 +281,7 @@ class Intro(Scene):
         self.play(
             TransformMatchingTex(
                 formula_var, formula_sis, key_map={"^2": "\\sqrt{"}, path_arc=PI / 2
-            ),
+            )
         )
         self.wait(2)
         self.play(FadeOut(formula_sis))

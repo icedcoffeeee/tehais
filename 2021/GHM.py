@@ -56,7 +56,7 @@ class LoadedSpring(VGroup):
         for _ in range(nspf):
             d_displacement += self.velocity * dt / nspf
             d_velocity += (
-                (-self.omega ** 2 * self.displacement - self.damping * self.velocity)
+                (-self.omega**2 * self.displacement - self.damping * self.velocity)
                 * dt
                 / nspf
             )
@@ -73,10 +73,7 @@ class LoadedSpring(VGroup):
 
     def add_frictional_ground(self):
         self.ground = VGroup(
-            Line(
-                self.load.get_bottom() + LEFT * 2,
-                self.load.get_bottom() + RIGHT * 2,
-            )
+            Line(self.load.get_bottom() + LEFT * 2, self.load.get_bottom() + RIGHT * 2)
         )
         self.ground.add(
             *[
@@ -301,10 +298,7 @@ class One(Scene):
             )
         )
         self.wait()
-        self.play(
-            answer[2].animate.set_color(YELLOW),
-            answer[3].animate.set_color(RED),
-        )
+        self.play(answer[2].animate.set_color(YELLOW), answer[3].animate.set_color(RED))
         self.wait()
 
 
@@ -370,8 +364,7 @@ class Two(Scene):
         )
         self.wait()
         self.play(
-            Circumscribe(f1[0][:5], run_time=3),
-            Circumscribe(f2[0][:6], run_time=3),
+            Circumscribe(f1[0][:5], run_time=3), Circumscribe(f2[0][:6], run_time=3)
         )
         self.wait()
 

@@ -33,26 +33,11 @@ class Intro(Scene):
         segue[-1].move_to(segue[-2], LEFT).set_color(WHITE)
 
         self.play(*(Write(i) for i in segue[:-1]))
-        self.play(
-            segue[1].animate.set_color(WHITE),
-            run_time=3,
-        )
-        self.play(
-            segue[2].animate.set_color(WHITE),
-            run_time=3,
-        )
-        self.play(
-            segue[3].animate.set_color(WHITE),
-            run_time=3,
-        )
-        self.play(
-            segue[4].animate.set_color(WHITE),
-            run_time=3,
-        )
-        self.play(
-            ReplacementTransform(segue[4], segue[5]),
-            run_time=3,
-        )
+        self.play(segue[1].animate.set_color(WHITE), run_time=3)
+        self.play(segue[2].animate.set_color(WHITE), run_time=3)
+        self.play(segue[3].animate.set_color(WHITE), run_time=3)
+        self.play(segue[4].animate.set_color(WHITE), run_time=3)
+        self.play(ReplacementTransform(segue[4], segue[5]), run_time=3)
         self.wait()
 
 
@@ -62,13 +47,11 @@ class Keserenjangan1(Scene):
         theta = 2 * PI / 3
         vec1 = Vector(3 * np.array([np.cos(theta), np.sin(theta), 0]), color=YELLOW)
         vec2 = Vector(
-            2 * np.array([np.cos(theta - PI / 2), np.sin(theta - PI / 2), 0]),
-            color=RED,
+            2 * np.array([np.cos(theta - PI / 2), np.sin(theta - PI / 2), 0]), color=RED
         )
         rangle = always_redraw(
             lambda: RightAngle(
-                Line(ORIGIN, vec1.get_end()),
-                Line(ORIGIN, vec2.get_end()),
+                Line(ORIGIN, vec1.get_end()), Line(ORIGIN, vec2.get_end())
             )
         )
         vec1_label = always_redraw(
@@ -264,12 +247,7 @@ class Keserenjangan2(Scene):
         vektor_g.restore()
 
         self.play(
-            FadeOut(
-                ax,
-                graph_g,
-                dots_g,
-                fungsi_g,
-            ),
+            FadeOut(ax, graph_g, dots_g, fungsi_g),
             FadeIn(vektor_f, dot_sym),
             vektor_g.animate.next_to(dot_sym),
         )
@@ -321,10 +299,7 @@ class Keserenjangan2(Scene):
 
         self.play(Write(set_serenjang))
         self.wait()
-        self.play(
-            Indicate(set_serenjang[0][0]),
-            Indicate(set_serenjang[1][0]),
-        )
+        self.play(Indicate(set_serenjang[0][0]), Indicate(set_serenjang[1][0]))
         self.wait()
         self.clear()
 
@@ -452,9 +427,7 @@ class GerakKerja1(Scene):
         self.play(AnimationGroup(Write(brace1), Write(tbrace1), lag_ratio=2))
         self.wait()
         self.play(
-            ReplacementTransform(brace1, brace2),
-            FadeOut(tbrace1),
-            FadeIn(tbrace2),
+            ReplacementTransform(brace1, brace2), FadeOut(tbrace1), FadeIn(tbrace2)
         )
         self.wait()
         self.play(FadeOut(brace2, tbrace2, formula_a_n2))
@@ -581,8 +554,7 @@ class GerakKerja1(Scene):
         )
         self.wait()
         self.play(
-            Write(cond := Tex("bagi $n\\ge 1$").next_to(lsc, DOWN)),
-            Unwrite(decl_n),
+            Write(cond := Tex("bagi $n\\ge 1$").next_to(lsc, DOWN)), Unwrite(decl_n)
         )
         lsc_cosine0 = MathTex(
             "a_0=\\frac 1{2\\pi}\\int_0^{2\\pi}f(x)", "\\kos(0x)", "\\dd{x}"
@@ -616,32 +588,18 @@ class GerakKerja1(Scene):
         lsc_cosine0.restore()
 
         self.play(
-            Write(lsc_sine),
-            VGroup(lsc, lsc_cosine0).animate.next_to(lsc_sine, UP),
+            Write(lsc_sine), VGroup(lsc, lsc_cosine0).animate.next_to(lsc_sine, UP)
         )
         self.wait()
 
 
 class Part1(Scene):
     def construct_(self):
-        asas = VGroup(
-            MathTex(
-                "f(x)=",
-                "a_1",
-                "\\kos(x)+",
-                "b_1",
-                "\\sin(x)+",
-            )
-        )
+        asas = VGroup(MathTex("f(x)=", "a_1", "\\kos(x)+", "b_1", "\\sin(x)+"))
         asas.add(
             *VGroup(
                 *[
-                    MathTex(
-                        f"a_{i}",
-                        f"\\kos({i}x)+",
-                        f"b_{i}",
-                        f"\\sin({i}x)+",
-                    )
+                    MathTex(f"a_{i}", f"\\kos({i}x)+", f"b_{i}", f"\\sin({i}x)+")
                     for i in range(2, 5)
                 ]
             )
@@ -650,24 +608,11 @@ class Part1(Scene):
         )
         asas.add(MathTex("...").next_to(asas[-1], DOWN, aligned_edge=LEFT))
 
-        mod_1 = VGroup(
-            MathTex(
-                "\\sin(x)=",
-                "0",
-                "\\kos(x)+",
-                "1",
-                "\\sin(x)+",
-            )
-        )
+        mod_1 = VGroup(MathTex("\\sin(x)=", "0", "\\kos(x)+", "1", "\\sin(x)+"))
         mod_1.add(
             *VGroup(
                 *[
-                    MathTex(
-                        f"0",
-                        f"\\kos({i}x)+",
-                        f"0",
-                        f"\\sin({i}x)+",
-                    )
+                    MathTex(f"0", f"\\kos({i}x)+", f"0", f"\\sin({i}x)+")
                     for i in range(2, 5)
                 ]
             )
@@ -735,22 +680,10 @@ class Example1(Scene):
         A = [A[0] / 2, *A[1:]]
         B = [self.get_coeff(func, "b", n=n) for n in range(iterations)]
         component_graphs_cosine = VGroup(
-            *[
-                plane1.plot(
-                    lambda x: A[n] * np.cos(n * x),
-                    color=BLUE,
-                )
-                for n in range(8)
-            ],
+            *[plane1.plot(lambda x: A[n] * np.cos(n * x), color=BLUE) for n in range(8)]
         ).save_state()
         component_graphs_sine = VGroup(
-            *[
-                plane1.plot(
-                    lambda x: B[n] * np.sin(n * x),
-                    color=RED,
-                )
-                for n in range(8)
-            ],
+            *[plane1.plot(lambda x: B[n] * np.sin(n * x), color=RED) for n in range(8)]
         ).save_state()
         component_graphs_cosine.scale(0.4).arrange().to_edge(LEFT)
         component_graphs_sine.scale(0.4).arrange().next_to(
@@ -758,8 +691,7 @@ class Example1(Scene):
         )
 
         self.play(
-            VGroup(plane1, main_graph).animate.scale(0.4).to_edge(UP),
-            Unwrite(main_tex),
+            VGroup(plane1, main_graph).animate.scale(0.4).to_edge(UP), Unwrite(main_tex)
         )
         self.play(
             *[
@@ -789,8 +721,7 @@ class Example1(Scene):
             )
             self.wait()
             graph = plane1.plot(
-                lambda x: self.get_fourier_approx(x, i, A, B),
-                color=PURPLE,
+                lambda x: self.get_fourier_approx(x, i, A, B), color=PURPLE
             )
             self.play(
                 ReplacementTransform(component_graphs_cosine[i], graph),
@@ -805,8 +736,7 @@ class Example1(Scene):
             var.tracker.set_value(i)
             graph.set_stroke(opacity=0.2)
             graph = plane1.plot(
-                lambda x: self.get_fourier_approx(x, i, A, B),
-                color=PURPLE,
+                lambda x: self.get_fourier_approx(x, i, A, B), color=PURPLE
             )
             self.add(graph)
             self.wait(0.1)
@@ -827,11 +757,7 @@ class Example1(Scene):
             raise ValueError("a_b is either 'a' or 'b'")
 
     def get_fourier_approx(
-        self,
-        x: float,
-        n: int,
-        A: Sequence[float],
-        B: Sequence[float],
+        self, x: float, n: int, A: Sequence[float], B: Sequence[float]
     ) -> float:
         ans = 0
         for i in range(n + 1):
@@ -872,28 +798,20 @@ class Extras1(Scene):
         self.play(
             AnimationGroup(
                 ShowPassingFlashWithThinningStrokeWidth(
-                    SurroundingRectangle(tex1[6][1]),
-                    time_width=1,
+                    SurroundingRectangle(tex1[6][1]), time_width=1
                 ),
                 AnimationGroup(
                     ShowPassingFlashWithThinningStrokeWidth(
                         SurroundingRectangle(VGroup(tex1[5][-1], tex1[6][0])),
                         time_width=1,
-                    ),
+                    )
                 ),
                 lag_ratio=1,
             )
         )
         self.wait()
         self.play(
-            TransformMatchingTex(
-                tex1,
-                tex2,
-                key_map={
-                    "\\pi": "L",
-                    "2\\pi": "2L",
-                },
-            )
+            TransformMatchingTex(tex1, tex2, key_map={"\\pi": "L", "2\\pi": "2L"})
         )
         self.wait()
 
@@ -906,13 +824,9 @@ class Complex1(Scene):
         VGroup(teorem_euler.target, teorem_euler.k).arrange(DOWN)
         self.play(Write(teorem_euler))
         self.wait()
-        self.play(
-            MoveToTarget(teorem_euler),
-            Write(teorem_euler.k),
-        )
+        self.play(MoveToTarget(teorem_euler), Write(teorem_euler.k))
         permudah = VGroup(
-            MathTex("\kos(x)=\\frac{z+z^*}2"),
-            MathTex("\sin(x)=\\frac{z-z^*}{2i}"),
+            MathTex("\kos(x)=\\frac{z+z^*}2"), MathTex("\sin(x)=\\frac{z-z^*}{2i}")
         ).arrange(DOWN)
         self.wait()
         self.play(Scroll(VGroup(teorem_euler, teorem_euler.k), permudah))

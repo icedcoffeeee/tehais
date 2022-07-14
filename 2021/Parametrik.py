@@ -31,11 +31,7 @@ class One(Scene):
         self.play(FadeOut(output_fx))
         self.play(
             Write(
-                input_x := VGroup(
-                    MathTex("2"),
-                    MathTex("3"),
-                    MathTex("4"),
-                )
+                input_x := VGroup(MathTex("2"), MathTex("3"), MathTex("4"))
                 .arrange(DOWN)
                 .next_to(mesin, LEFT)
             )
@@ -44,11 +40,7 @@ class One(Scene):
         self.play(
             ReplacementTransform(
                 input_x.copy(),
-                output_fx := VGroup(
-                    MathTex("5"),
-                    MathTex("10"),
-                    MathTex("17"),
-                )
+                output_fx := VGroup(MathTex("5"), MathTex("10"), MathTex("17"))
                 .arrange(DOWN)
                 .next_to(mesin, RIGHT),
             )
@@ -64,14 +56,14 @@ class One(Scene):
         ax.add_coordinates()
 
         self.play(FadeOut(mesin, mesin_label))
-        dots = VGroup(*[Dot(ax.c2p(i, i ** 2 + 1)) for i in [2, 3, 4]])
+        dots = VGroup(*[Dot(ax.c2p(i, i**2 + 1)) for i in [2, 3, 4]])
         self.play(
             Write(ax),
             ReplacementTransform(output_fx, dots),
             ReplacementTransform(input_x, dots),
         )
         self.wait()
-        graf = ax.get_graph(lambda x: x ** 2 + 1, color=RED).set_z_index(-1)
+        graf = ax.get_graph(lambda x: x**2 + 1, color=RED).set_z_index(-1)
         self.play(Create(graf), run_time=3)
         self.wait()
         parameter = ValueTracker(1)
@@ -273,18 +265,8 @@ class Four(ThreeDScene):
         def z_func(u, v):
             return rad * np.cos(u.get_value())
 
-        x_dot = always_redraw(
-            lambda: Dot(
-                x_sli.n2p(x_func(u_val, v_val)),
-                color=RED,
-            )
-        )
-        y_dot = always_redraw(
-            lambda: Dot(
-                y_sli.n2p(y_func(u_val, v_val)),
-                color=BLUE,
-            )
-        )
+        x_dot = always_redraw(lambda: Dot(x_sli.n2p(x_func(u_val, v_val)), color=RED))
+        y_dot = always_redraw(lambda: Dot(y_sli.n2p(y_func(u_val, v_val)), color=BLUE))
         z_dot = always_redraw(lambda: Dot(z_sli.n2p(z_func(u_val, v_val)), color=GREEN))
         dots = VGroup(u_dot, v_dot, x_dot, y_dot, z_dot)
 
@@ -297,11 +279,7 @@ class Four(ThreeDScene):
 
         sum_dot = always_redraw(
             lambda: Dot3D(
-                [
-                    x_func(u_val, v_val),
-                    y_func(u_val, v_val),
-                    z_func(u_val, v_val),
-                ],
+                [x_func(u_val, v_val), y_func(u_val, v_val), z_func(u_val, v_val)],
                 color=YELLOW,
             )
         )

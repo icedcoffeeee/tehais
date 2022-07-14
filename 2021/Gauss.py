@@ -23,11 +23,7 @@ class keupayaan_demo(ThreeDScene):
         c1 = Charge(2, RIGHT * 1.5)
         c2 = Charge(-1, LEFT * 1.5)
 
-        a0 = ParametricSurface(
-            lambda u, v: np.array([u, v, 0]),
-            (-5, 5),
-            (-5, 5),
-        )
+        a0 = ParametricSurface(lambda u, v: np.array([u, v, 0]), (-5, 5), (-5, 5))
         a = ParametricSurface(
             lambda u, v: np.array([u, v, self.surface_func(u, v, c1, c2)]),
             (-5, 5),
@@ -66,9 +62,7 @@ class keupayaan_demo(ThreeDScene):
                 Transform(
                     a,
                     ParametricSurface(
-                        lambda u, v: np.array([u, v, 0]),
-                        (-5, 5),
-                        (-5, 5),
+                        lambda u, v: np.array([u, v, 0]), (-5, 5), (-5, 5)
                     ),
                 )
             ],
@@ -79,7 +73,7 @@ class keupayaan_demo(ThreeDScene):
         height = 0
         for c in charges:
             dist = np.linalg.norm(c.get_center() - [u, v, 0])
-            height += c.magnitude / dist ** 2
+            height += c.magnitude / dist**2
         if abs(height) > 10:
             height = 10 * height / abs(height)
         return height
@@ -148,20 +142,14 @@ class fluks_demo_2d(Scene):
         field_vect = Vector(RIGHT * 3, color=PURPLE)
         label_S = MathTex("\\va{S}", color=YELLOW).next_to(normal_vect.get_end())
         label_E = MathTex("\\va{E}", color=PURPLE).next_to(field_vect.get_end())
-        self.play(
-            GrowArrow(normal_vect),
-            GrowArrow(field_vect),
-        )
+        self.play(GrowArrow(normal_vect), GrowArrow(field_vect))
         self.wait()
         mag_brace = BraceBetweenPoints(ORIGIN, normal_vect.get_end())
         self.play(GrowFromCenter(mag_brace))
         self.wait()
         self.play(ShrinkToCenter(mag_brace))
         self.wait()
-        self.play(
-            Write(label_E),
-            Write(label_S),
-        )
+        self.play(Write(label_E), Write(label_S))
         formula = MathTex(
             "\\phi_E=",
             "\\va E",
@@ -176,10 +164,7 @@ class fluks_demo_2d(Scene):
         self.play(Write(formula[1:4]), b.animate.set_opacity(0.5))
         self.wait()
         efield_brace = Brace(field_vect, UP)
-        self.play(
-            Write(efield_brace),
-            Write(formula[4:6]),
-        )
+        self.play(Write(efield_brace), Write(formula[4:6]))
         self.play(FadeOut(efield_brace))
         self.wait()
         proj_vect = always_redraw(
@@ -201,10 +186,7 @@ class fluks_demo_2d(Scene):
         self.play(Create(ang_arc), Write(ang_arc_label))
         self.play(ReplacementTransform(proj_vect_label, formula[6:]))
         self.wait()
-        self.play(
-            Write(formula[0]),
-            formula[1:].animate.next_to(formula[0]),
-        )
+        self.play(Write(formula[0]), formula[1:].animate.next_to(formula[0]))
         self.wait()
         self.play(ang_val.animate.set_value(PI / 2), run_time=2)
         self.wait()
@@ -499,18 +481,8 @@ class fluks_calc(Scene):
         self.wait()
         self.play(
             AnimationGroup(
-                Create(
-                    VGroup(
-                        s1 := Slash(f4[0][3:5]),
-                        s2 := Slash(f4[0][14:16]),
-                    )
-                ),
-                Create(
-                    VGroup(
-                        s3 := Slash(f4[0][9:11]),
-                        s4 := Slash(f4[0][16:18]),
-                    )
-                ),
+                Create(VGroup(s1 := Slash(f4[0][3:5]), s2 := Slash(f4[0][14:16]))),
+                Create(VGroup(s3 := Slash(f4[0][9:11]), s4 := Slash(f4[0][16:18]))),
                 lag_ratio=0.75,
             )
         )
@@ -544,11 +516,7 @@ class Extras(Scene):
         cas2 = Charge(-1, point=LEFT * 1.5)
         label1 = Tex("negatif").next_to(cas2, DOWN)
         label2 = Tex("positif").next_to(cas1, DOWN)
-        self.play(
-            FadeIn(cas1, cas2),
-            Write(label1),
-            Write(label2),
-        )
+        self.play(FadeIn(cas1, cas2), Write(label1), Write(label2))
         self.wait()
         self.play(
             label1.animate(path_arc=PI / 4).next_to(cas1, DOWN),
@@ -580,10 +548,7 @@ class Extras(Scene):
     def part4(self):
         charge1 = Charge().move_to([-3.5, 0, 0])
         charge2 = Charge().move_to([3.5, 0, 0])
-        medan1 = ElectricField(
-            charge1,
-            x_max=0,
-        )
+        medan1 = ElectricField(charge1, x_max=0)
         medan2 = ElectricField(
             charge2, x_min=0.5, length_func=lambda x: sigmoid(x) * 0.25
         )
@@ -654,8 +619,5 @@ class Extras3(Scene):
         self.wait()
         self.play(t.animate.shift(UP))
         self.play(Write(t1), Write(t2))
-        self.play(
-            Create(Cross(t1)),
-            Create(Cross(t2)),
-        )
+        self.play(Create(Cross(t1)), Create(Cross(t2)))
         self.wait()

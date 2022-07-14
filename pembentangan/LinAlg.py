@@ -13,12 +13,7 @@ class FungsiMatriks(Scene):
         vec = Vector([3, 2, 0], color=ORANGE)
         answer = mat @ vec_mat
         equation = (
-            VGroup(
-                Matrix(mat),
-                Matrix(vec_mat),
-                MathTex("="),
-                Matrix(answer),
-            )
+            VGroup(Matrix(mat), Matrix(vec_mat), MathTex("="), Matrix(answer))
             .arrange()
             .to_corner(UL)
         )
@@ -65,10 +60,7 @@ class FungsiMatriks(Scene):
         )
         self.wait()
         space.save_state()
-        self.play(
-            space.animate.apply_matrix(mat @ np.linalg.inv(mat_1)),
-            run_time=3,
-        )
+        self.play(space.animate.apply_matrix(mat @ np.linalg.inv(mat_1)), run_time=3)
         self.wait()
 
         self.next_section(type=PresentationSectionType.SUB_NORMAL)
@@ -108,14 +100,10 @@ class FungsiMatriks(Scene):
         self.next_section(type=PresentationSectionType.SUB_NORMAL)
 
         eigen_span = VGroup(
-            Line(UR * 8, DL * 8, color=PURPLE),
-            Line(UL * 8, DR * 8, color=PURPLE),
+            Line(UR * 8, DL * 8, color=PURPLE), Line(UL * 8, DR * 8, color=PURPLE)
         )
 
-        self.play(
-            space.animate.apply_matrix(mat),
-            run_time=3,
-        )
+        self.play(space.animate.apply_matrix(mat), run_time=3)
         self.play(GrowFromCenter(eigen_span))
 
         self.next_section(type=PresentationSectionType.SUB_NORMAL)
@@ -125,10 +113,7 @@ class FungsiMatriks(Scene):
         eigen_equation[0][4].set_color(MAROON)
         bgrec = BackgroundRectangle(eigen_equation)
 
-        self.play(
-            FadeIn(bgrec),
-            Write(eigen_equation),
-        )
+        self.play(FadeIn(bgrec), Write(eigen_equation))
         self.wait()
         eigen_val = VGroup(
             BraceBetweenPoints(ORIGIN, eig_vec_1.get_end(), color=MAROON),
@@ -182,24 +167,15 @@ class FungsiMatriks(Scene):
 
         det_equation = MathTex("\\det(A)", "=").to_corner(UL)
         bgrec = BackgroundRectangle(det_equation)
-        self.play(
-            FadeIn(bgrec),
-            Write(det_equation[0]),
-        )
+        self.play(FadeIn(bgrec), Write(det_equation[0]))
 
-        det_kwarg = {
-            "color": YELLOW,
-            "fill_opacity": 0.7,
-        }
+        det_kwarg = {"color": YELLOW, "fill_opacity": 0.7}
         det_init = Square(1, **det_kwarg).next_to(ORIGIN, UR, 0)
         self.play(GrowFromPoint(det_init, ORIGIN))
         space.add(det_init)
 
         self.next_section(type=PresentationSectionType.SUB_NORMAL)
-        self.play(
-            space.animate.apply_matrix(mat),
-            run_time=3,
-        )
+        self.play(space.animate.apply_matrix(mat), run_time=3)
         det_text = Tex("Luas").set_color(YELLOW).next_to(det_equation)
         bgrec2 = BackgroundRectangle(det_text)
         self.play(
@@ -238,22 +214,15 @@ class FungsiMatriks(Scene):
             ),
             Text("-").move_to(ar),
         )
-        self.play(
-            *(Create(i) for i in ad[:2]),
-            *(Create(i) for i in bc[:2]),
-        )
-        self.play(
-            GrowFromPoint(ad[2], ORIGIN),
-            GrowFromPoint(bc[2], ORIGIN),
-        )
+        self.play(*(Create(i) for i in ad[:2]), *(Create(i) for i in bc[:2]))
+        self.play(GrowFromPoint(ad[2], ORIGIN), GrowFromPoint(bc[2], ORIGIN))
         self.play(Write(ad[3]), Write(bc[3]))
 
         self.next_section(type=PresentationSectionType.SUB_NORMAL)
         self.play(Unwrite(ad[3]), Unwrite(bc[3]))
         self.play(*(Uncreate(i) for i in [*ad[:2], *bc[:2]]))
         self.play(
-            ReplacementTransform(ad, det_init),
-            ReplacementTransform(bc, det_init),
+            ReplacementTransform(ad, det_init), ReplacementTransform(bc, det_init)
         )
         self.wait()
         self.next_section(type=PresentationSectionType.SUB_NORMAL)
